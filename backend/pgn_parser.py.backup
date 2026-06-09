@@ -1,0 +1,137 @@
+# backend/pgn_parser.py
+
+import chess.pgn
+from io import StringIO
+from typing import List, Dict, Optional
+from datetime import datetime
+
+
+def parse_pgn_string(pgn_content: str) -> List[Dict]:
+    """
+    Parse PGN string content and extract games
+    
+    Returns list of game dictionaries with metadata
+    """
+    games = []
+    
+    try:
+        pgn_io = StringIO(pgn_content)
+        
+        while True:
+            game = chess.pgn.read_game(pgn_io)
+            if game is None:
+                break
+            
+            # Extract game data
+            game_data = extract_game_data(game)
+            if game_data:
+                games.append(game_data)
+    
+    except Exception as e:
+        print(f"Error parsing PGN: {str(e)}")
+        return []
+    
+    return games
+
+
+def extract_game_data(game) -> Optional[Dict]:
+    """
+    Extract relevant data from a chess.pgn.Game object
+    """
+    try:
+        headers = game.headers
+        
+        # Required fields
+        if not headers.get("Date") or not headers.get("Result"):
+            return None
+        
+        # Parse date
+        try:
+            date_str = headers.get("Date", "2024.01.01")
+            # Convert from "2024.01.15" format
+            date_parts = date_str.split(".")
+            if len(date_parts) == 3:
+                played_at = datetime(
+                    int(date_parts[0]),
+                    int(date_parts[1]),
+                    int(date_parts[2])
+                )
+            else:
+                played_at = datetime.now()
+        except:
+            played_at = datetime.now()
+        
+        # Get moves
+        moves_list = []
+        board = chess.Board()
+        for move in game.mainline_moves():
+            moves_list.append(board.san(move))
+            board.push(move)
+        
+        moves_pgn = " ".join(moves_list)
+        
+        # Extract opening info
+        opening_eco = headers.get("ECO", None)
+        opening_name = headers.get("Opening", None)
+        
+        # Determine player color and opponent
+        white_player = headers.get("White", "Unknown")
+        black_player = headers.get("Black", "Unknown")
+        
+        # Determine result
+        result_raw = headers.get("Result", "*")
+        if result_raw == "1-0":
+            result = "win"
+        elif result_raw == "0-1":
+            result = "loss"
+        elif result_raw == "1/2-1/2":
+            result = "draw"
+        else:
+            result = "unknown"
+        
+        # Extract ratings
+        white_elo = headers.get("WhiteElo", None)
+        black_elo = headers.get("BlackElo", None)
+        
+        if white_elo:
+            try:
+                white_elo = int(white_elo)
+            except:
+                white_elo = None
+        
+        if black_elo:
+            try:
+                black_elo = int(black_elo)
+            except:
+                black_elo = None
+        
+        # Time control
+        time_control = headers.get("TimeControl", None)
+        
+        game_data = {
+            "white_player": white_player,
+            "black_player": black_player,
+            "played_at": played_at,
+            "result": result,
+            "moves": moves_pgn,
+            "white_elo": white_elo,
+            "black_elo": black_elo,
+            "opening_eco": opening_eco,
+            "opening_name": opening_name,
+            "time_control": time_control,
+            "move_count": len(moves_list)
+        }
+        
+        return game_data
+    
+    except Exception as e:
+        print(f"Error extracting game data: {str(e)}")
+        return None
+
+
+def validate_game(game_data: Dict) -> bool:
+    """
+    Validate that game has required fields
+    """
+    required_fields = ["played_at", "result", "moves"]
+    return all(field in game_data for field in required_fields)
