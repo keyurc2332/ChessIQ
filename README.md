@@ -5,7 +5,6 @@
 ![Chess](https://img.shields.io/badge/Chess-Analytics-blue?style=for-the-badge)
 ![ML](https://img.shields.io/badge/Machine%20Learning-72.49%25-green?style=for-the-badge)
 ![Python](https://img.shields.io/badge/Python-3.10+-yellow?style=for-the-badge)
-![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red?style=for-the-badge)
 
 ---
 
@@ -457,7 +456,6 @@ ChessIQ: AI Chess Analytics Platform
 ## 🔗 Links
 
 - **GitHub**: https://github.com/keyurc2332/ChessIQ
-- **Live Dashboard**: https://chessiq.streamlit.app (coming soon)
 - **LinkedIn**: https://www.linkedin.com/in/keyur-chauhan-/
 
 ---
@@ -478,7 +476,6 @@ MIT License - Free to use for learning and research.
 
 - **Chess.com** - Game data API
 - **Stockfish** - Chess engine
-- **Streamlit** - Dashboard framework
 - **scikit-learn** - ML algorithms
 
 ---
