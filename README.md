@@ -56,7 +56,7 @@ Time Span:            5 years (2021-2026)
 Total Moves:          328,258
 Win Rate:             49.1% (2,276 wins)
 Average Accuracy:     91.93%
-Rating Improvement:   +544 points (+91%)
+Rating Improvement:   +826 points (+138%)
 ```
 
 ### 🤖 ML Model Performance
@@ -77,7 +77,7 @@ Data Leakage:         ✅ FIXED (pre-game features only)
 | **Best Opening** | D31: 60.26% win rate |
 | **Worst Opening** | A04: 39.19% win rate |
 | **Consistency** | Only 1.8% variance across time controls |
-| **Rating Growth** | 597 → 1,141 (+91% in 5 years) |
+| **Rating Growth** | 597 → 1,423 (+138% in 5 years) |
 
 ---
 
@@ -227,7 +227,7 @@ python main.py
 - Centipawn loss by format
 
 ### **5. 📈 5-Year Progress**
-- Rating progression: 597 → 1,141 (+544)
+- Rating progression: 597 → 1,423 (+826)
 - Win rate trend: 44.5% → 57.1% (upward)
 - Time series analysis & insights
 
@@ -257,7 +257,7 @@ python main.py
 - ⭐ Excellent consistency: 91.93% average accuracy
 - ⭐ Dominates weaker opponents: 88.4% win rate
 - ⭐ Solid opening repertoire: D31, D20, A40
-- ⭐ Steady improvement: +544 rating over 5 years
+- ⭐ Steady improvement: +826 rating over 5 years
 - ⭐ Time control flexibility: Equally good in all formats
 
 ### ⚠️ Weaknesses
