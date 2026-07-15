@@ -800,7 +800,7 @@ if st.session_state.page == 'landing':
         st.metric("Accuracy", "72.49%", "ML Model")
     
     with stat_col4:
-        st.metric("Rating", "1,359", "+544 growth")
+        st.metric("Rating", "1,423", "+826 growth")
 
 # ============================================================================
 # DASHBOARD PAGE
@@ -855,7 +855,7 @@ elif st.session_state.page == 'dashboard':
             <div class="kpi-icon">📈</div>
             <div class="kpi-label">Peak Rating</div>
             <div class="kpi-value">1,423</div>
-            <div class="kpi-detail">+544 growth</div>
+            <div class="kpi-detail">+826 growth</div>
         </div>
         """, unsafe_allow_html=True)
     
@@ -1207,7 +1207,32 @@ elif st.session_state.page == 'progress':
         st.markdown('<div class="chart-title">Rating Progression</div>', unsafe_allow_html=True)
         
         windows = np.arange(1, 25)
-        ratings = [597, 647, 771, 822, 838, 823, 911, 1024, 961, 944, 951, 982, 1065, 1016, 1100, 1080, 1130, 1141, 939, 1007, 1124, 1153, 1135, 1141]
+        ratings = [
+597,
+647,
+771,
+822,
+838,
+823,
+911,
+1024,
+961,
+944,
+951,
+982,
+1065,
+1016,
+1100,
+1080,
+1130,
+1141,
+939,
+1007,
+1124,
+1153,
+1135,
+1423
+]
         
         fig = go.Figure()
         
@@ -1276,8 +1301,8 @@ elif st.session_state.page == 'progress':
         st.markdown("""
         <div class="metric-box">
         <div class="metric-label">Rating Growth</div>
-        <div style="font-size: 1.1rem; color: #b0b9c3;">597 → 1,141</div>
-        <div style="font-size: 1.5rem; font-weight: 900; color: #10b981;">+544</div>
+        <div style="font-size: 1.1rem; color: #b0b9c3;">597 → 1,423</div>
+        <div style="font-size: 1.5rem; font-weight: 900; color: #10b981;">+826</div>
         <div style="font-size: 0.85rem; color: #b0b9c3;">(+91%)</div>
         </div>
         """, unsafe_allow_html=True)
@@ -1327,7 +1352,7 @@ elif st.session_state.page == 'predict':
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
-        your_rating = st.number_input("Your Rating", 100, 2000, 1141, 10, key="pred_your")
+        your_rating = st.number_input("Your Rating", 100, 2000, 1423, 10, key="pred_your")
     
     with col2:
         opponent_rating = st.number_input("Opponent Rating", 100, 2000, 900, 10, key="pred_opp")
